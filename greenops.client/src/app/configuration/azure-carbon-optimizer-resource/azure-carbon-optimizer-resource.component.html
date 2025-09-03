@@ -1,1 +1,6 @@
 <div> Azure Carbon Optimizer Resource works </div>
+
+<div style="margin-top: 16px; display: flex; justify-content: flex-end;" slot="footer">
+    <sh-button (click)="onCancel()" label="Cancel" card-footer></sh-button>
+    <sh-button (click)="onSubmit()" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}"></sh-button>
+</div>

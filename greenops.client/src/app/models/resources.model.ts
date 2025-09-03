@@ -1,6 +1,6 @@
     export enum ResourceType {
-        AzurePipeline,
-        AzureCarbonOptimizer
+        AzurePipeline = "Azure Pipeline",
+        AzureCarbonOptimizer = "Azure Carbon Optimizer"
     }
 
     export class Resource {

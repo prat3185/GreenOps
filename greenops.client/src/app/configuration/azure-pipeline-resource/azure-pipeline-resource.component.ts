@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AzurePipelineResource, ResourceType } from '../../models/resources.model';
 
 @Component({
   selector: 'app-azure-pipeline-resource',
@@ -6,10 +7,23 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./azure-pipeline-resource.component.css']
 })
 export class AzurePipelineResourceComponent {
-  @Input() resource: any;
-  editMode = false;
+  @Input() resource: AzurePipelineResource = {
+    id: '',
+    name: '',
+    resourceType: ResourceType.AzurePipeline, // Fixed type assignment
+    pipelineId: '',
+    organization: '',
+    project: ''
+  };
+  @Input() isEditMode: boolean = false;
+  @Output() save = new EventEmitter<AzurePipelineResource>();
+  @Output() cancel = new EventEmitter<void>();
 
-  toggleEdit() {
-    this.editMode = !this.editMode;
+  onSubmit() {
+    this.save.emit(this.resource);
+  }
+
+  onCancel() {
+    this.cancel.emit();
   }
 }

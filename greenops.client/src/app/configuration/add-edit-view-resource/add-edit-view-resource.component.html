@@ -1,0 +1,33 @@
+<sh-card label="{{ isEditMode ? 'Edit Resource' : 'Add Resource' }}">
+    <sh-input-text *ngIf="isEditMode || isViewMode"
+      [read-only]="isViewMode"
+      label="Resource Name"
+      [(value)]="resource.name"
+    ></sh-input-text>
+
+    <sh-dropdown [disabled]="isEditMode || isViewMode"
+      label="Resource Type"
+      [(value)]="resource.resourceType"
+      (ngModelChange)="onResourceTypeChange($event)"
+    >
+      <sh-menu-item label="Azure Carbon Optimizer"></sh-menu-item>
+      <sh-menu-item label="Azure Pipeline"></sh-menu-item>
+    </sh-dropdown>
+
+    <div *ngIf="resource.resourceType === 'Azure Carbon Optimizer'">
+      <app-azure-carbon-optimizer-resource
+        [resourceDetails]="resource"
+        [isEditMode]="isEditMode"
+      ></app-azure-carbon-optimizer-resource>
+    </div>
+    <div *ngIf="resource.resourceType === 'Azure Pipeline'">
+      <app-azure-pipeline-resource
+        [resourceDetails]="resource"
+        [isEditMode]="isEditMode"
+      ></app-azure-pipeline-resource>
+    </div>
+
+    <div style="margin-top: 16px; display: flex; justify-content: flex-end;" slot="footer">
+      <ng-content select="[card-footer]"></ng-content>
+    </div>
+</sh-card>
