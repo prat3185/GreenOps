@@ -1,0 +1,23 @@
+﻿<sh-page theme="dark">
+    <sh-access-bar
+        label="Green Ops"
+        slot="access"
+    >
+    <sh-icon
+      slot="tabs"
+      id="dashboard"
+      button
+      icon="dashboard"
+      [routerLink]="'/dashboard'"
+    ></sh-icon>
+    <sh-icon
+      slot="functions"
+      id="settings"
+      button
+      icon="settings"
+      [routerLink]="'/config'"
+    ></sh-icon>
+  </sh-access-bar>
+
+  <router-outlet></router-outlet>
+</sh-page>

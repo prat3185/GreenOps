@@ -1,0 +1,24 @@
+<sh-card>
+  <div slot="header" style="display: flex; align-items: center; justify-content: space-between;">
+    <sh-text size='header-1'>Connected Resources</sh-text>
+    <sh-icon icon="add" button size="s" (click)="addResource()" style="cursor: pointer;"></sh-icon>
+  </div>
+  <sh-table>
+    <sh-table-row slot="header">
+      <sh-table-head columns='9'>Name</sh-table-head>
+      <sh-table-head columns='9'>Resource Type</sh-table-head>
+      <sh-table-head columns='6'>Edit</sh-table-head>
+    </sh-table-row>
+    <sh-table-row *ngFor="let resource of resources; let i = index">
+      <sh-table-cell columns='9'>
+        <sh-text>{{ resource.name }}</sh-text>
+      </sh-table-cell>
+      <sh-table-cell columns='9'>
+        <sh-text>{{ resource.resourceType.toString() }}</sh-text>
+      </sh-table-cell>
+      <sh-table-cell columns='6'>
+        <sh-icon icon="edit" button size="s" (click)="editResource(i)" style="cursor: pointer;"></sh-icon>
+      </sh-table-cell>
+    </sh-table-row>
+  </sh-table>
+</sh-card>
