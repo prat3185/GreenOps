@@ -1,4 +1,15 @@
-    export enum ResourceType {
+    export const GeographyOptions: string[] = [
+        "Australia",
+        "Brazil",
+        "Canada",
+        "Asia Pacific",
+        "Europe",
+        "India",
+        "United Kingdom",
+        "United States"
+  ];
+
+   export enum ResourceType {
         AzurePipeline = "Azure Pipeline",
         AzureCarbonOptimizer = "Azure Carbon Optimizer"
     }
@@ -14,6 +25,7 @@
         pipelineId: string;
         organization: string;
         project: string;
+        geography: string;
     }
 
     export class AzureCarbonOptimizerResource extends Resource {

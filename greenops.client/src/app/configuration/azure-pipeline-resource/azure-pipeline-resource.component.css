@@ -1,1 +1,7 @@
 /* Add Azure Pipeline Resource specific styles here */
+.azure-pipeline-resource{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+}

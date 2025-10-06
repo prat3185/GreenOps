@@ -6,7 +6,8 @@ import { AddEditResourceComponent } from './add-edit-view-resource/add-edit-view
 const routes: Routes = [
   { path: '', component: ConfigurationComponent },
   { path: 'add-resource', component: AddEditResourceComponent },
-  { path: 'edit-resource/:id', component: AddEditResourceComponent }
+  { path: 'edit-resource/:id', component: AddEditResourceComponent },
+  { path: 'view-resource/:id', component: AddEditResourceComponent }
 ];
 
 @NgModule({

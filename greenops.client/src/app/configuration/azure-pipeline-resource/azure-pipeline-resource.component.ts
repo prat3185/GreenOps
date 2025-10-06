@@ -1,29 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AzurePipelineResource, ResourceType } from '../../models/resources.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AzurePipelineResource, GeographyOptions, Resource, ResourceType } from '../../models/resources.model';
 
 @Component({
   selector: 'app-azure-pipeline-resource',
   templateUrl: './azure-pipeline-resource.component.html',
   styleUrls: ['./azure-pipeline-resource.component.css']
 })
-export class AzurePipelineResourceComponent {
-  @Input() resource: AzurePipelineResource = {
-    id: '',
-    name: '',
-    resourceType: ResourceType.AzurePipeline, // Fixed type assignment
-    pipelineId: '',
-    organization: '',
-    project: ''
-  };
+export class AzurePipelineResourceComponent implements OnInit {
+  @Input() resourceDetails: AzurePipelineResource;
   @Input() isEditMode: boolean = false;
-  @Output() save = new EventEmitter<AzurePipelineResource>();
-  @Output() cancel = new EventEmitter<void>();
+  @Input() isViewMode: boolean = false;
 
-  onSubmit() {
-    this.save.emit(this.resource);
-  }
+  readonly geographyOptions: string[] = GeographyOptions;
 
-  onCancel() {
-    this.cancel.emit();
+  ngOnInit() {
+    if (!this.resourceDetails) {
+      this.resourceDetails = {
+        id: '',
+        name: '',
+        resourceType: ResourceType.AzurePipeline,
+        pipelineId: '',
+        organization: '',
+        project: '',
+        geography: ''
+      };
+    }
   }
 }

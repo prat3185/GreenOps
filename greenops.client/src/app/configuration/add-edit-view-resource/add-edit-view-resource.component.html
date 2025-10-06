@@ -1,15 +1,10 @@
-<sh-card label="{{ isEditMode ? 'Edit Resource' : 'Add Resource' }}">
-    <sh-input-text *ngIf="isEditMode || isViewMode"
-      [read-only]="isViewMode"
-      label="Resource Name"
-      [(value)]="resource.name"
-    ></sh-input-text>
-
-    <sh-dropdown [disabled]="isEditMode || isViewMode"
+<sh-card label="{{ isEditMode ? 'Edit Resource' : isViewMode ? 'View Resource' : 'Add Resource' }}">
+    <sh-dropdown [attr.readonly]="(isEditMode || isViewMode) ? true : null"
       label="Resource Type"
-      [(value)]="resource.resourceType"
-      (ngModelChange)="onResourceTypeChange($event)"
-    >
+      [value]="resource?.resourceType"
+      (value-changed)="onResourceTypeChange($event)"
+      required
+      >
       <sh-menu-item label="Azure Carbon Optimizer"></sh-menu-item>
       <sh-menu-item label="Azure Pipeline"></sh-menu-item>
     </sh-dropdown>
@@ -18,16 +13,20 @@
       <app-azure-carbon-optimizer-resource
         [resourceDetails]="resource"
         [isEditMode]="isEditMode"
+        [isViewMode]="isViewMode"
       ></app-azure-carbon-optimizer-resource>
     </div>
     <div *ngIf="resource.resourceType === 'Azure Pipeline'">
       <app-azure-pipeline-resource
         [resourceDetails]="resource"
         [isEditMode]="isEditMode"
+        [isViewMode]="isViewMode"
       ></app-azure-pipeline-resource>
     </div>
-
-    <div style="margin-top: 16px; display: flex; justify-content: flex-end;" slot="footer">
-      <ng-content select="[card-footer]"></ng-content>
+    <div style="display: flex; justify-content: flex-end; gap: 8px;" slot="footer">
+      <sh-button (click)="onCancel()" label="{{ isViewMode ? 'Close' : 'Cancel' }}"></sh-button>
+      <sh-button size="l" *ngIf="!isViewMode" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}"></sh-button>
     </div>
 </sh-card>
+
+

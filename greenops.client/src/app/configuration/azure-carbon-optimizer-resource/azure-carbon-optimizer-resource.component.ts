@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AzureCarbonOptimizerResource, ResourceType } from '../../models/resources.model';
 
 @Component({
@@ -6,24 +6,22 @@ import { AzureCarbonOptimizerResource, ResourceType } from '../../models/resourc
   templateUrl: './azure-carbon-optimizer-resource.component.html',
   styleUrls: ['./azure-carbon-optimizer-resource.component.css']
 })
-export class AzureCarbonOptimizerResourceComponent {
-  @Input() resource: AzureCarbonOptimizerResource = {
-    id: '',
-    name: '',
-    resourceType: ResourceType.AzureCarbonOptimizer, // Fixed type assignment
-    subscriptionId: '',
-    tenantId: '',
-    clientId: ''
-  };
+export class AzureCarbonOptimizerResourceComponent implements OnInit {
+  @Input() resourceDetails: AzureCarbonOptimizerResource;
   @Input() isEditMode: boolean = false;
-  @Output() save = new EventEmitter<AzureCarbonOptimizerResource>();
-  @Output() cancel = new EventEmitter<void>();
+  @Input() isViewMode: boolean = false;
 
-  onSubmit() {
-    this.save.emit(this.resource);
+    ngOnInit() {
+    if (!this.resourceDetails) {
+      this.resourceDetails = {
+        id: '',
+        name: '',
+        resourceType: ResourceType.AzureCarbonOptimizer,
+        subscriptionId: '',
+        tenantId: '',
+        clientId: ''
+      };
+    }
   }
 
-  onCancel() {
-    this.cancel.emit();
-  }
 }

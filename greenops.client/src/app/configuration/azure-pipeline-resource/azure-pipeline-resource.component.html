@@ -1,4 +1,33 @@
+<div class="azure-pipeline-resource">
+    <sh-input-text
+      label="Name"
+      [(value)]="resourceDetails.name"
+      [attr.readonly]="isViewMode ? true : null"
+      required
+    ></sh-input-text>
 
-<p> Azure Pipeline Resource works </p>
-<sh-button (click)="onCancel()" label="Cancel" card-footer></sh-button>
-<sh-button (click)="onSubmit()" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}" card-footer></sh-button>
+    <sh-input-text
+      label="Pipeline ID"
+      [(value)]="resourceDetails.pipelineId"
+      [attr.readonly]="isViewMode ? true : null"
+      required
+    ></sh-input-text>
+
+    <sh-input-text
+      label="Organization"
+      [(value)]="resourceDetails.organization"
+      [attr.readonly]="isViewMode ? true : null"
+      required
+    ></sh-input-text>
+
+    <sh-input-text
+      label="Project"
+      [(value)]="resourceDetails.project"
+      [attr.readonly]="isViewMode ? true : null"
+      required
+    ></sh-input-text>
+
+    <sh-dropdown label="Geography" [(ngModel)]="resourceDetails.geography" name="region" [readonly]="isViewMode">
+      <sh-menu-item *ngFor="let geo of geographyOptions" [label]="geo"></sh-menu-item>
+    </sh-dropdown>
+</div>

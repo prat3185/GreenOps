@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Resource } from '../../models/resources.model';
+import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '../../services/resource.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-resource',
@@ -9,13 +8,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-edit-view-resource.component.css']
 })
 export class AddEditResourceComponent implements OnInit {
-  @Output() save = new EventEmitter<any>(); // Emits the saved resource
-  @Output() cancel = new EventEmitter<void>(); // Emits when the user cancels
-  resource: Resource;
+  resource: any;
   isEditMode: boolean = false;
   isViewMode: boolean = false;
+  isAddMode: boolean = false;
 
-  constructor(private route: ActivatedRoute, private resourceService: ResourceService) {}
+  constructor(private route: ActivatedRoute, private resourceService: ResourceService, private router: Router) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -26,17 +24,24 @@ export class AddEditResourceComponent implements OnInit {
         this.isEditMode = true;
       }
     }
+    else{
+      this.isAddMode = true;
+    }
   }
 
-  onResourceTypeChange(type: any) {
-    // Reset details when resource type changes
+  onResourceTypeChange(event: any) {
+    if(this.resource){
+      this.resource.resourceType = event.target.value;
+    }
+    else{
+      this.resource = { resourceType: event.target.value };
+    }
   }
 
   onSubmit() {
-    this.save.emit(this.resource); // Emit the resource to the parent
   }
 
   onCancel() {
-    this.cancel.emit(); // Emit cancel event to the parent
+    this.router.navigate(['/config']);
   }
 }

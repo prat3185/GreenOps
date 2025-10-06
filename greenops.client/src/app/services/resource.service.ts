@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, forkJoin, map, BehaviorSubject, tap } from 'rxjs';
-import { AzurePipelineResource, AzureCarbonOptimizerResource, ResourceType } from '../models/resources.model';
+import { AzurePipelineResource, AzureCarbonOptimizerResource, ResourceType, GeographyOptions } from '../models/resources.model';
 
 @Injectable({ providedIn: 'root' })
 export class ResourceService {
 	private azurePipelineUrl = '/api/azure-pipelines';
 	private carbonOptimizerUrl = '/api/azure-carbon-optimizers';
 	private allResources$ = new BehaviorSubject<(AzurePipelineResource | AzureCarbonOptimizerResource)[]>([]);
-
 
 	constructor(private http: HttpClient) {}
 
@@ -24,14 +23,15 @@ export class ResourceService {
 
 	getAllAzurePipelines(): Observable<AzurePipelineResource[]> {
 		const resources: AzurePipelineResource[] = [];
-		for (let i = 1; i <= 4; i++) {
+		for (let i = 1; i <= 2; i++) {
 			resources.push({
 				id: i.toString(),
 				name: `Azure Pipeline ${i}`,
 				resourceType: ResourceType.AzurePipeline,
 				pipelineId: `pipeline-${i}`,
 				organization: `org-${i}`,
-				project: `project-${i}`
+				project: `project-${i}`,
+				geography: `${GeographyOptions[0]}`
 			});
 		}
 		return of(resources);
@@ -39,6 +39,14 @@ export class ResourceService {
 	}
 
 	getResourceById(id: string): AzurePipelineResource | AzureCarbonOptimizerResource | undefined {
+		if(this.allResources$.value.length == 0){
+			this.getAllResources().subscribe(
+				() => {
+					// Resource list is now populated
+					return this.allResources$.value.find(r => r.id === id) as AzurePipelineResource | AzureCarbonOptimizerResource;
+				}
+			);
+		}
 		return this.allResources$.value.find(r => r.id === id) as AzurePipelineResource | AzureCarbonOptimizerResource;
 	}
 
@@ -55,7 +63,7 @@ export class ResourceService {
 
 	getAllCarbonOptimizers(): Observable<AzureCarbonOptimizerResource[]> {
 		const resources: AzureCarbonOptimizerResource[] = [];
-		for (let i = 1; i <= 2; i++) {
+		for (let i = 3; i <= 4; i++) {
 			resources.push({
 				id: i.toString(),
 				name: `Azure Carbon Optimizer ${i}`,

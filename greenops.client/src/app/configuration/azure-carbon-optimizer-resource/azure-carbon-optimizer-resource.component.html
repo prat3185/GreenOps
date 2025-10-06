@@ -1,6 +1,29 @@
-<div> Azure Carbon Optimizer Resource works </div>
+<div class="carbon-optimizer-resource">
+    <sh-input-text
+      label="Name"
+      [(value)]="resourceDetails.name"
+      [att.readonly]="isViewMode? true : null"
+      required
+    ></sh-input-text>
 
-<div style="margin-top: 16px; display: flex; justify-content: flex-end;" slot="footer">
-    <sh-button (click)="onCancel()" label="Cancel" card-footer></sh-button>
-    <sh-button (click)="onSubmit()" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}"></sh-button>
+    <sh-input-text
+      label="Subscription ID"
+      [(value)]="resourceDetails.subscriptionId"
+      [att.readonly]="isViewMode? true : null"
+      required
+    ></sh-input-text>
+
+    <sh-input-text
+      label="Tenant ID"
+      [(value)]="resourceDetails.tenantId"
+      [att.readonly]="isViewMode? true : null"
+      required
+    ></sh-input-text>
+
+    <sh-input-text
+      label="Client ID"
+      [(value)]="resourceDetails.clientId"
+      [att.readonly]="isViewMode? true : null"
+      required
+    ></sh-input-text>
 </div>
