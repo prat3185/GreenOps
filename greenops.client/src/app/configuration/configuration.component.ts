@@ -29,15 +29,6 @@ export class ConfigurationComponent {
     this.router.navigate(['/config/add-resource']);
   }
 
-  deleteResource(id: string, type: ResourceType) {
-    if (type === ResourceType.AzureCarbonOptimizer) {
-      this.resourceService.deleteCarbonOptimizer(id);
-    } else {
-      this.resourceService.deleteAzurePipeline(id);
-    }
-    this.resources = this.resources.filter(resource => resource.id !== id);
-  }
-
   viewResource(id: string) {
     this.router.navigate(['/config/view-resource', id]);
   }

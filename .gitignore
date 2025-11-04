@@ -8,3 +8,4 @@
 /greenops.client/obj/Debug
 /GreenOps.Server/bin/Debug/net8.0
 /GreenOps.Server/obj
+/GreenOps.Server/Properties/launchSettings.json

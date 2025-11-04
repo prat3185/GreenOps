@@ -1,36 +1,54 @@
-    export const GeographyOptions: string[] = [
-        "Australia",
-        "Brazil",
-        "Canada",
-        "Asia Pacific",
-        "Europe",
-        "India",
-        "United Kingdom",
-        "United States"
-  ];
+export interface PipelineRunInfo {
+  buildId: number;
+  totalJobDuration: number;
+}
 
-   export enum ResourceType {
-        AzurePipeline = "Azure Pipeline",
-        AzureCarbonOptimizer = "Azure Carbon Optimizer"
-    }
+export interface PipelineDefinitionInfo {
+  pipelineId: number;
+  pipelineName: string;
+  runs: PipelineRunInfo[];
+  totalCarbon: number;
+}
 
-    export class Resource {
-        id: string;
-        name: string;
-        resourceType : ResourceType;
-    }
+export interface ProjectPipelineCarbonResponse {
+  id: string;
+  projectName: string;
+  pipelines: PipelineDefinitionInfo[];
+}
 
-    export class AzurePipelineResource extends Resource {
-        override resourceType: ResourceType = ResourceType.AzurePipeline;
-        pipelineId: string;
-        organization: string;
-        project: string;
-        geography: string;
-    }
+export const GeographyOptions: string[] = [
+    "Australia",
+    "Brazil",
+    "Canada",
+    "Asia Pacific",
+    "Europe",
+    "India",
+    "United Kingdom",
+    "United States"
+];
 
-    export class AzureCarbonOptimizerResource extends Resource {
-        override resourceType: ResourceType = ResourceType.AzureCarbonOptimizer;
-        subscriptionId: string;
-        tenantId: string;
-        clientId: string;
-    }
+export enum ResourceType {
+    AzurePipeline,
+    AzureCarbonOptimizer
+}
+
+export class Resource {
+    id: string;
+    name: string;
+    type : ResourceType;
+}
+
+export class AzurePipelineResource extends Resource {
+    override type: ResourceType = ResourceType.AzurePipeline;
+    pipelineId: string;
+    organization: string;
+    project: string;
+    geography: string;
+}
+
+export class AzureCarbonOptimizerResource extends Resource {
+    override type: ResourceType = ResourceType.AzureCarbonOptimizer;
+    subscriptionId: string;
+    tenantId: string;
+    clientId: string;
+}

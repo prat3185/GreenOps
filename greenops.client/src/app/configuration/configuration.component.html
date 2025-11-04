@@ -1,27 +1,27 @@
 <sh-card label="Connected Resources">
-  <sh-icon icon="plus" button (click)="addResource()" slot="functions"></sh-icon>
+  <!-- <sh-icon icon="plus" button (click)="addResource()" slot="functions"></sh-icon> -->
   <sh-table>
     <sh-table-row slot="header">
-      <sh-table-head columns='10'>Name</sh-table-head>
-      <sh-table-head columns='10'>Resource Type</sh-table-head>
-      <sh-table-head columns='4'>Actions</sh-table-head>
+      <sh-table-head columns='11'>Name</sh-table-head>
+      <sh-table-head columns='11'>Resource Type</sh-table-head>
+      <sh-table-head columns='2'>Actions</sh-table-head>
     </sh-table-row>
     <sh-table-row *ngFor="let resource of resources; let i = index">
-      <sh-table-cell columns='10'>
+      <sh-table-cell columns='11'>
         <sh-text>{{ resource.name }}</sh-text>
       </sh-table-cell>
-      <sh-table-cell columns='10'>
-        <sh-text>{{ resource.resourceType.toString() }}</sh-text>
+      <sh-table-cell columns='11'>
+        <sh-text>{{ resource.type == 1 ? 'Azure Carbon Optimizer' : 'Azure Pipeline' }}</sh-text>
       </sh-table-cell>
       <sh-table-cell>
         <sh-icon icon="show" button size="s" (click)="viewResource(resource.id)"></sh-icon>
       </sh-table-cell>
-      <sh-table-cell>
+      <!-- <sh-table-cell>
         <sh-icon icon="edit" button size="s" (click)="editResource(resource.id)"></sh-icon>
       </sh-table-cell>
       <sh-table-cell>
         <sh-icon icon="delete" button size="s" (click)="deleteResource(resource.id, resource.resourceType)"></sh-icon>
-      </sh-table-cell>
+      </sh-table-cell> -->
     </sh-table-row>
   </sh-table>
 </sh-card>

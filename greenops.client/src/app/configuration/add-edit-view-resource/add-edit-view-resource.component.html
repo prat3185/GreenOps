@@ -1,7 +1,7 @@
 <sh-card label="{{ isEditMode ? 'Edit Resource' : isViewMode ? 'View Resource' : 'Add Resource' }}">
     <sh-dropdown [attr.readonly]="(isEditMode || isViewMode) ? true : null"
       label="Resource Type"
-      [value]="resource?.resourceType"
+      [value]="resource?.type"
       (value-changed)="onResourceTypeChange($event)"
       required
       >
@@ -9,14 +9,14 @@
       <sh-menu-item label="Azure Pipeline"></sh-menu-item>
     </sh-dropdown>
 
-    <div *ngIf="resource.resourceType === 'Azure Carbon Optimizer'">
+    <div *ngIf="resource.type === 'Azure Carbon Optimizer'">
       <app-azure-carbon-optimizer-resource
         [resourceDetails]="resource"
         [isEditMode]="isEditMode"
         [isViewMode]="isViewMode"
       ></app-azure-carbon-optimizer-resource>
     </div>
-    <div *ngIf="resource.resourceType === 'Azure Pipeline'">
+    <div *ngIf="resource.type === 'Azure Pipeline'">
       <app-azure-pipeline-resource
         [resourceDetails]="resource"
         [isEditMode]="isEditMode"
@@ -25,7 +25,7 @@
     </div>
     <div style="display: flex; justify-content: flex-end; gap: 8px;" slot="footer">
       <sh-button (click)="onCancel()" label="{{ isViewMode ? 'Close' : 'Cancel' }}"></sh-button>
-      <sh-button size="l" *ngIf="!isViewMode" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}"></sh-button>
+      <!-- <sh-button size="l" *ngIf="!isViewMode" label="{{ isEditMode ? 'Save Changes' : 'Add Resource' }}"></sh-button> -->
     </div>
 </sh-card>
 

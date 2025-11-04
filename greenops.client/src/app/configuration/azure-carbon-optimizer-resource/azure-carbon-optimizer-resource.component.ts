@@ -16,7 +16,7 @@ export class AzureCarbonOptimizerResourceComponent implements OnInit {
       this.resourceDetails = {
         id: '',
         name: '',
-        resourceType: ResourceType.AzureCarbonOptimizer,
+        type: ResourceType.AzureCarbonOptimizer,
         subscriptionId: '',
         tenantId: '',
         clientId: ''

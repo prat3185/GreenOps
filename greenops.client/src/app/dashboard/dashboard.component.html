@@ -1,21 +1,21 @@
 <sh-pane slot="left" label="Resources" behavior="collapse">
   <sh-accordion label="Azure Carbon Optimizer" expanded>
     <sh-dropdown label="Azure Cost Optimizer Resources" multi-select>
-      <sh-menu-item label="Resource 1"></sh-menu-item>
-      <sh-menu-item label="Resource 2"></sh-menu-item>
-      <sh-menu-item label="Resource 3"></sh-menu-item>
-      <sh-menu-item label="Resource 4"></sh-menu-item>
-      <sh-menu-item label="Resource 5"></sh-menu-item>
+      <sh-menu-item 
+        *ngFor="let resource of azureCarbonOptimizerResources" 
+        [label]="resource.name" active>
+      </sh-menu-item>
     </sh-dropdown>
   </sh-accordion>
   <sh-accordion label="Azure Hosted Pipelines" expanded>
-  <sh-dropdown label="Azure Hosted Pipelines" multi-select>
-      <sh-menu-item label="Resource 1"></sh-menu-item>
-      <sh-menu-item label="Resource 2"></sh-menu-item>
-      <sh-menu-item label="Resource 3"></sh-menu-item>
-      <sh-menu-item label="Resource 4"></sh-menu-item>
-      <sh-menu-item label="Resource 5"></sh-menu-item>
+    <sh-dropdown label="Azure Hosted Pipelines" multi-select>
+      <sh-menu-item 
+        *ngFor="let resource of azurePipelineResources" 
+        [label]="resource.name" active>
+      </sh-menu-item>
     </sh-dropdown>
   </sh-accordion>
 </sh-pane>
-<sh-card class="main-content"></sh-card>
+<sh-card class="main-content">
+  <sh-chart #chart id='demo-pie-chart' type='pie' legend></sh-chart>
+</sh-card>

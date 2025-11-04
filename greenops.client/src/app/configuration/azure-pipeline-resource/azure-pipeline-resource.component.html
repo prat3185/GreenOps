@@ -27,7 +27,7 @@
       required
     ></sh-input-text>
 
-    <sh-dropdown label="Geography" [(ngModel)]="resourceDetails.geography" name="region" [readonly]="isViewMode">
+    <sh-dropdown label="Geography" [(ngModel)]="resourceDetails.geography" name="region" [attr.readonly]="isViewMode">
       <sh-menu-item *ngFor="let geo of geographyOptions" [label]="geo"></sh-menu-item>
     </sh-dropdown>
 </div>

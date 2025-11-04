@@ -18,7 +18,7 @@ export class AzurePipelineResourceComponent implements OnInit {
       this.resourceDetails = {
         id: '',
         name: '',
-        resourceType: ResourceType.AzurePipeline,
+        type: ResourceType.AzurePipeline,
         pipelineId: '',
         organization: '',
         project: '',
